@@ -31,6 +31,7 @@ func main() {
 		Auth: []ssh.AuthMethod{
 			ssh.Password(password),
 		},
+		HostKeyCallback: ssh.InsecureIgnoreHostKey,
 	}
 	socket := fmt.Sprintf("%s:%d", hostname, port)
 	sshConn, err := ssh.Dial("tcp", socket, sshConfig)
@@ -38,10 +39,12 @@ func main() {
 		fmt.Fprintf(os.Stderr, "establish ssh connection: %w", err)
 		os.Exit(1)
 	}
+	defer sshConn.Close()
 	sftp, err := sftp.NewClient(sshConn)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "establish sftp connection: %w", err)
 		os.Exit(1)
 	}
+	defer sftp.Close()
 	fmt.Println(sftp)
 }
