@@ -1,8 +1,13 @@
-module main
+module github.com/patrickbucher/sftpdebug
 
-go 1.13
+go 1.20
 
 require (
-	github.com/pkg/sftp v1.10.1
-	golang.org/x/crypto v0.0.0-20191002192127-34f69633bfdc
+	github.com/pkg/sftp v1.13.5
+	golang.org/x/crypto v0.6.0
+)
+
+require (
+	github.com/kr/fs v0.1.0 // indirect
+	golang.org/x/sys v0.5.0 // indirect
 )
